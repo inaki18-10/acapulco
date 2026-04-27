@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acapulco — Desigualdad Global</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0a3d5c;
+    --teal: #0e7490;
+    --sand: #e8d5b0;
+    --coral: #e05c3a;
+    --cream: #faf6ef;
+    --dark: #0d1f2d;
+    --text: #1a3444;
+    --accent: #f0a500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,61,92,0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; color: var(--sand); letter-spacing: 2px;
+  }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul li a {
+    color: rgba(232,213,176,0.7); text-decoration: none;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--dark) 0%, var(--ocean) 50%, #1a5c7a 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to bottom right, transparent 49%, var(--cream) 50%);
+  }
+  .wave-bg {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 120px; opacity: 0.1;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(240,165,0,0.2); border: 1px solid var(--accent);
+    color: var(--accent); padding: 0.3rem 1rem;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    color: var(--sand); line-height: 0.9;
+    letter-spacing: 3px; margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--coral); }
+  .hero p {
+    color: rgba(232,213,176,0.8); font-size: 1.1rem;
+    max-width: 500px; margin: 0 auto 2rem; line-height: 1.7;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; justify-content: center; margin-top: 3rem;
+  }
+  .stat { text-align: center; }
+  .stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; color: var(--accent); display: block;
+  }
+  .stat .label {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 1px; color: rgba(232,213,176,0.6);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 5rem; left: 50%; transform: translateX(-50%);
+    color: rgba(232,213,176,0.4); font-size: 0.75rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--teal);
+    font-weight: 600; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--ocean); line-height: 1; margin-bottom: 1.5rem;
+  }
+  .intro-text {
+    font-size: 1.1rem; line-height: 1.8; color: #2a4a5e;
+    max-width: 700px; font-weight: 300;
+  }
+
+  /* ICEBERG */
+  .iceberg-section { background: var(--dark); padding: 6rem 2rem; }
+  .iceberg-inner { max-width: 1000px; margin: 0 auto; }
+  .iceberg-section h2 { color: var(--sand); }
+  .iceberg-section .section-label { color: var(--teal); }
+  .iceberg-section .intro-text { color: rgba(232,213,176,0.7); }
+
+  .iceberg-visual {
+    margin-top: 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  }
+  .iceberg-top {
+    background: linear-gradient(135deg, var(--teal), #0e5a7a);
+    border-radius: 12px; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .iceberg-top::before {
+    content: '🌊'; position: absolute; top: 1rem; right: 1rem;
+    font-size: 2rem; opacity: 0.3;
+  }
+  .iceberg-bottom {
+    background: linear-gradient(135deg, var(--ocean), var(--dark));
+    border-radius: 12px; padding: 2rem;
+    border: 1px solid rgba(14,116,144,0.3);
+    position: relative; overflow: hidden;
+  }
+  .iceberg-bottom::before {
+    content: '🧊'; position: absolute; top: 1rem; right: 1rem;
+    font-size: 2rem; opacity: 0.3;
+  }
+  .iceberg-top h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; color: white; margin-bottom: 1rem; letter-spacing: 1px;
+  }
+  .iceberg-bottom h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; color: var(--sand); margin-bottom: 1rem; letter-spacing: 1px;
+  }
+  .iceberg-item {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .iceberg-item .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--coral); flex-shrink: 0; margin-top: 6px;
+  }
+  .iceberg-bottom .dot { background: var(--accent); }
+  .iceberg-item p { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .card {
+    background: white; border-radius: 12px;
+    padding: 1.75rem; border: 1px solid rgba(14,116,144,0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,61,92,0.12); }
+  .card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: var(--teal);
+  }
+  .card.coral::after { background: var(--coral); }
+  .card.gold::after { background: var(--accent); }
+  .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; color: var(--ocean);
+    letter-spacing: 1px; margin-bottom: 0.5rem;
+  }
+  .card p { font-size: 0.9rem; line-height: 1.6; color: #4a6a7a; font-weight: 300; }
+
+  /* PLAN DE ACCION */
+  .plan-section {
+    background: linear-gradient(135deg, var(--ocean) 0%, #1a5c7a 100%);
+    padding: 6rem 2rem;
+  }
+  .plan-inner { max-width: 1000px; margin: 0 auto; }
+  .plan-section h2 { color: var(--sand); }
+  .plan-section .section-label { color: var(--accent); }
+
+  .timeline {
+    margin-top: 3rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+    width: 2px; background: rgba(232,213,176,0.2);
+  }
+  .timeline-item {
+    display: flex; gap: 2rem; margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .timeline-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .timeline-content {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(232,213,176,0.15);
+    border-radius: 10px; padding: 1.25rem 1.5rem; flex: 1;
+  }
+  .timeline-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem; color: var(--sand);
+    letter-spacing: 1px; margin-bottom: 0.4rem;
+  }
+  .timeline-content p { font-size: 0.9rem; color: rgba(232,213,176,0.7); line-height: 1.6; }
+  .timeline-tag {
+    display: inline-block; font-size: 0.65rem;
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 0.2rem 0.6rem; border-radius: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .tag-climate { background: rgba(14,116,144,0.3); color: var(--teal); }
+  .tag-gender { background: rgba(224,92,58,0.3); color: #f09070; }
+  .tag-poverty { background: rgba(240,165,0,0.3); color: var(--accent); }
+
+  /* CHATBOT */
+  .chatbot-section { padding: 6rem 2rem; background: var(--cream); }
+  .chatbot-inner { max-width: 700px; margin: 0 auto; }
+
+  .chat-window {
+    background: white; border-radius: 16px;
+    border: 1px solid rgba(14,116,144,0.2);
+    overflow: hidden; box-shadow: 0 8px 40px rgba(10,61,92,0.1);
+    margin-top: 2rem;
+  }
+  .chat-header {
+    background: var(--ocean); padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--teal); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .chat-header-info h4 { color: var(--sand); font-size: 0.9rem; font-weight: 600; }
+  .chat-header-info p { color: rgba(232,213,176,0.6); font-size: 0.75rem; }
+  .online-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #22c55e; margin-left: auto;
+    box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
+  }
+
+  .chat-messages {
+    padding: 1.5rem; min-height: 300px; max-height: 400px;
+    overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .msg {
+    max-width: 80%; padding: 0.75rem 1rem;
+    border-radius: 12px; font-size: 0.9rem; line-height: 1.5;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .msg.bot {
+    background: #f0f7fa; color: var(--text);
+    border-bottom-left-radius: 4px; align-self: flex-start;
+  }
+  .msg.user {
+    background: var(--ocean); color: white;
+    border-bottom-right-radius: 4px; align-self: flex-end;
+  }
+  .typing {
+    display: flex; gap: 4px; padding: 0.75rem 1rem;
+    background: #f0f7fa; border-radius: 12px; border-bottom-left-radius: 4px;
+    align-self: flex-start; align-items: center;
+  }
+  .typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal); animation: typingAnim 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingAnim {
+    0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  .chat-suggestions {
+    padding: 0 1.5rem 1rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .suggestion {
+    background: #f0f7fa; border: 1px solid rgba(14,116,144,0.2);
+    border-radius: 20px; padding: 0.4rem 0.9rem;
+    font-size: 0.8rem; color: var(--teal); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .suggestion:hover { background: var(--teal); color: white; }
+
+  .chat-input-area {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(14,116,144,0.1);
+    display: flex; gap: 0.75rem;
+  }
+  .chat-input {
+    flex: 1; padding: 0.75rem 1rem;
+    border: 1px solid rgba(14,116,144,0.2); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; color: var(--text);
+    transition: border 0.2s;
+  }
+  .chat-input:focus { border-color: var(--teal); }
+  .chat-send {
+    background: var(--ocean); color: white;
+    border: none; border-radius: 8px; padding: 0.75rem 1.25rem;
+    cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .chat-send:hover { background: var(--teal); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer p {
+    color: rgba(232,213,176,0.4); font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer strong { color: rgba(232,213,176,0.7); }
+
+  /* DIVIDER */
+  .divider {
+    height: 4px;
+    background: linear-gradient(to right, var(--coral), var(--teal), var(--accent));
+  }
+
+  @media (max-width: 600px) {
+    .iceberg-visual { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Acapulco 2023</div>
+  <ul>
+    <li><a href="#contexto">Contexto</a></li>
+    <li><a href="#iceberg">Iceberg</a></li>
+    <li><a href="#soluciones">Soluciones</a></li>
+    <li><a href="#plan">Plan</a></li>
+    <li><a href="#chatbot">Chat</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Desigualdad Global — Acapulco, México</div>
+    <h1>CLIMA,<br><span>POBREZA</span><br>Y GÉNERO</h1>
+    <p>Cómo el huracán Otis expuso décadas de desigualdad estructural en uno de los destinos turísticos más importantes de México.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="num">66.4%</span>
+        <span class="label">Pobreza en Guerrero</span>
+      </div>
+      <div class="stat">
+        <span class="num">$15B</span>
+        <span class="label">Pérdidas USD</span>
+      </div>
+      <div class="stat">
+        <span class="num">CAT 5</span>
+        <span class="label">Huracán Otis 2023</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTEXTO -->
+<section id="contexto">
+  <div class="section-label">01 — Contexto</div>
+  <h2>El caso<br>Acapulco</h2>
+  <p class="intro-text">El 25 de octubre de 2023, el huracán Otis tocó tierra en Acapulco como categoría 5, el máximo en la escala Saffir-Simpson. En pocas horas destruyó lo que tardó décadas en construirse. Pero Otis no creó la desigualdad de Acapulco, solo la hizo imposible de ignorar.</p>
+
+  <div class="cards-grid" style="margin-top: 2.5rem;">
+    <div class="card">
+      <div class="card-icon">🌀</div>
+      <h3>Cambio Climático</h3>
+      <p>El calentamiento del océano Pacífico intensificó a Otis de tormenta tropical a categoría 5 en menos de 24 horas, un fenómeno sin precedentes en el registro histórico de huracanes en México.</p>
+    </div>
+    <div class="card coral">
+      <div class="card-icon">📉</div>
+      <h3>Pobreza Estructural</h3>
+      <p>El 66.4% de la población de Guerrero vive en pobreza y el 25.5% en pobreza extrema (CONEVAL, 2022). Acapulco tenía un alto grado de marginación histórica pese a ser un destino turístico internacional.</p>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">♀️</div>
+      <h3>Desigualdad de Género</h3>
+      <p>Las mujeres fueron las más afectadas en la recuperación post-Otis. La dependencia económica del turismo informal y la falta de programas con perspectiva de género agravaron su situación.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ICEBERG -->
+<div class="iceberg-section" id="iceberg">
+  <div class="iceberg-inner">
+    <div class="section-label">02 — Modelo Iceberg</div>
+    <h2>Lo que se ve<br>y lo que no</h2>
+    <p class="intro-text">El modelo iceberg nos ayuda a entender que los desastres naturales como Otis son solo la punta visible. Lo que realmente determina el impacto está debajo, en las estructuras sociales y económicas que nadie quiso atender antes.</p>
+
+    <div class="iceberg-visual">
+      <div class="iceberg-top">
+        <h3>🌊 Visible — La punta</h3>
+        <div class="iceberg-item"><div class="dot"></div><p>Destrucción masiva de infraestructura hotelera y habitacional</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Pérdidas económicas de 15,000 millones de dólares</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Interrupción total del turismo por meses</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Desplazamiento de familias y pérdida de empleos</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Colapso de servicios básicos: agua, luz, comunicaciones</p></div>
+      </div>
+      <div class="iceberg-bottom">
+        <h3>🧊 Invisible — La base</h3>
+        <div class="iceberg-item"><div class="dot"></div><p>Décadas de pobreza y marginación ignoradas por las autoridades</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Economía totalmente dependiente del turismo sin diversificación</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Urbanización sin planeación en zonas de alto riesgo</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Desigualdad de género en acceso a recursos y recuperación</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Cambio climático que intensifica fenómenos extremos</p></div>
+        <div class="iceberg-item"><div class="dot"></div><p>Corrupción e ineficiencia en la gestión del riesgo</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOLUCIONES -->
+<section id="soluciones">
+  <div class="section-label">03 — Propuestas Sostenibles</div>
+  <h2>Soluciones para<br>Acapulco</h2>
+  <p class="intro-text">Las soluciones tienen que atacar los tres frentes al mismo tiempo: el cambio climático, la pobreza y la desigualdad de género. No sirve de nada reconstruir lo mismo que ya falló.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <h3>Infraestructura Resiliente al Clima</h3>
+      <p>Reconstruir con materiales y diseños resistentes a huracanes. Crear sistemas de alerta temprana comunitarios y zonas de protección costera con manglares, que además absorben CO2.</p>
+    </div>
+    <div class="card coral">
+      <div class="card-icon">💼</div>
+      <h3>Diversificación Económica</h3>
+      <p>Reducir la dependencia del turismo fomentando economía circular, agricultura sostenible local y pesca responsable. Crear empleos verdes que no dependan de un solo sector vulnerable.</p>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">♀️</div>
+      <h3>Reconstrucción con Perspectiva de Género</h3>
+      <p>El PNUD ya identificó esto como prioridad. Los programas de recuperación deben incluir a mujeres en la toma de decisiones y garantizar que los apoyos lleguen a jefas de familia.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏘️</div>
+      <h3>Vivienda Social Sostenible</h3>
+      <p>Reubicar asentamientos de zonas de alto riesgo hacia áreas seguras con vivienda digna. Esto atiende tanto la vulnerabilidad climática como la pobreza estructural.</p>
+    </div>
+    <div class="card coral">
+      <div class="card-icon">⚡</div>
+      <h3>Energías Renovables Locales</h3>
+      <p>Implementar paneles solares comunitarios y microredes energéticas que no colapsen ante desastres. Conecta directamente con lo trabajado en la actividad de cambio climático sobre energías renovables.</p>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">🎓</div>
+      <h3>Educación y Ciudadanía Digital</h3>
+      <p>Usar herramientas de IA para monitorear riesgos climáticos y empoderar a comunidades con información en tiempo real, conectando con el ODS 16 de instituciones sólidas y participación ciudadana.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN DE ACCION -->
+<div class="plan-section" id="plan">
+  <div class="plan-inner">
+    <div class="section-label">04 — Plan de Acción</div>
+    <h2>Propuesta<br>Integral</h2>
+    <p class="intro-text" style="color: rgba(232,213,176,0.8);">Un plan por fases que integra los hallazgos de las actividades A, B y C, aplicados específicamente a la realidad de Acapulco.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-num">1</div>
+        <div class="timeline-content">
+          <span class="timeline-tag tag-climate">Cambio Climático</span>
+          <h3>Fase 1 — Resiliencia Inmediata (0-1 año)</h3>
+          <p>Implementar sistemas de alerta temprana basados en IA para huracanes. Restaurar manglares costeros como barrera natural. Instalar microredes solares en comunidades marginadas para garantizar energía ante futuros desastres. Como aprendimos en la actividad B, la concentración de CO2 ya supera los 420 ppm, por lo que los eventos extremos van a seguir ocurriendo.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">2</div>
+        <div class="timeline-content">
+          <span class="timeline-tag tag-gender">Género</span>
+          <h3>Fase 2 — Equidad en la Reconstrucción (1-3 años)</h3>
+          <p>Crear programas de capacitación y microcréditos específicamente para mujeres jefas de familia afectadas por Otis. Incluir perspectiva de género en todos los proyectos de vivienda y empleo, siguiendo la metodología que el PNUD ya propuso para Acapulco.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">3</div>
+        <div class="timeline-content">
+          <span class="timeline-tag tag-poverty">Pobreza</span>
+          <h3>Fase 3 — Diversificación Económica (3-5 años)</h3>
+          <p>Desarrollar sectores alternativos al turismo: acuicultura sostenible, economía circular, turismo comunitario con beneficio directo a habitantes locales. Esto conecta con los factores económicos de sostenibilidad urbana de la actividad A.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-num">4</div>
+        <div class="timeline-content">
+          <span class="timeline-tag tag-climate">Largo Plazo</span>
+          <h3>Fase 4 — Ciudad Sostenible (5-10 años)</h3>
+          <p>Convertir Acapulco en un modelo de ciudad costera sostenible: infraestructura verde, gobernanza participativa, economía diversificada y comunidades resilientes al clima. Aplicando los 8 factores de ciudades sostenibles de la actividad A de forma integral.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div class="chatbot-section" id="chatbot">
+  <div class="chatbot-inner">
+    <div class="section-label">05 — Asistente</div>
+    <h2>Pregúntame<br>sobre Acapulco</h2>
+    <p class="intro-text">Tienes dudas sobre el proyecto, el modelo iceberg o las propuestas? Pregúntame aquí.</p>
+
+    <div class="chat-window">
+      <div class="chat-header">
+        <div class="chat-avatar">🌊</div>
+        <div class="chat-header-info">
+          <h4>Asistente Acapulco</h4>
+          <p>Desigualdad, clima y género</p>
+        </div>
+        <div class="online-dot"></div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">¡Hola! Soy el asistente de este proyecto sobre Acapulco. Puedo explicarte el modelo iceberg, las soluciones propuestas o cómo se conecta todo con el ODS 16. ¿Qué quieres saber?</div>
+      </div>
+
+      <div class="chat-suggestions">
+        <button class="suggestion" onclick="sendSuggestion(this)">¿Qué es el modelo iceberg?</button>
+        <button class="suggestion" onclick="sendSuggestion(this)">¿Cómo afectó Otis a las mujeres?</button>
+        <button class="suggestion" onclick="sendSuggestion(this)">¿Cuál es el ODS 16?</button>
+        <button class="suggestion" onclick="sendSuggestion(this)">¿Cómo se conecta con cambio climático?</button>
+      </div>
+
+      <div class="chat-input-area">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button class="chat-send" onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Iñaki Omar Arévalo Barona — A01661012</strong><br>
+  Tecnológico de Monterrey, Campus Santa Fe<br>
+  Tecnología, Ciudadanía y Sociedad<br><br>
+  Fuentes: CONEVAL (2022) · PNUD México (2024) · CIPDH (2025) · Integralia (2024) · TecScience (2023)</p>
+</footer>
+
+<script>
+const responses = {
+  "modelo iceberg": "El modelo iceberg divide los problemas en dos partes: lo visible (la punta) y lo invisible (la base). En Acapulco, lo visible fue la destrucción física de Otis. Lo invisible son décadas de pobreza estructural, falta de planeación urbana, desigualdad de género y dependencia económica del turismo que nadie quiso atender antes del huracán.",
+  "mujeres": "Las mujeres fueron las más afectadas porque muchas dependen de empleos informales en turismo que desaparecieron con Otis. Además, como jefas de familia, enfrentaron la recuperación sin programas específicos de apoyo. El PNUD implementó una estrategia de transversalización de género en la reconstrucción precisamente por esto.",
+  "ods 16": "El ODS 16 busca promover sociedades pacíficas, justicia e instituciones sólidas. En el caso de Acapulco se conecta directamente porque la respuesta desigual del gobierno ante el desastre evidenció instituciones débiles. Sin instituciones fuertes y transparentes, la reconstrucción beneficia más a las zonas ya privilegiadas que a las marginadas.",
+  "cambio climático": "El cambio climático intensificó a Otis de forma sin precedentes: pasó de tormenta tropical a categoría 5 en menos de 24 horas por el calentamiento del océano. Como vimos en la actividad B del proyecto, la concentración de CO2 ya supera los 420 ppm cuando el límite seguro es 350 ppm, lo que hace cada vez más frecuentes estos eventos extremos.",
+  "default": "Buena pregunta. Este proyecto analiza cómo el huracán Otis en 2023 expuso la desigualdad estructural de Acapulco desde tres ángulos: cambio climático, pobreza y género. Las propuestas buscan atacar los tres al mismo tiempo para construir una ciudad realmente sostenible. ¿Quieres que te explique algún punto específico?"
+};
+
+function getResponse(msg) {
+  const lower = msg.toLowerCase();
+  if (lower.includes('iceberg') || lower.includes('visible') || lower.includes('invisible')) return responses["modelo iceberg"];
+  if (lower.includes('mujer') || lower.includes('género') || lower.includes('genero') || lower.includes('otis') && lower.includes('mujer')) return responses["mujeres"];
+  if (lower.includes('ods') || lower.includes('16') || lower.includes('instituc')) return responses["ods 16"];
+  if (lower.includes('clima') || lower.includes('otis') || lower.includes('huracan') || lower.includes('huracán') || lower.includes('co2')) return responses["cambio climático"];
+  return responses["default"];
+}
+
+function addMessage(text, type) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'typing'; div.id = 'typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  addMessage(text, 'user');
+  input.value = '';
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage(getResponse(text), 'bot');
+  }, 1200);
+}
+
+function sendSuggestion(btn) {
+  const text = btn.textContent;
+  addMessage(text, 'user');
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage(getResponse(text), 'bot');
+  }, 1200);
+}
+</script>
+</body>
+</html>
